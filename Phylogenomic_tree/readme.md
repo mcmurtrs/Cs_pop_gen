@@ -10,6 +10,12 @@
 ## Fasta:
 - FINAL_E1-.min4.fasta
 
+# Variants:
+
+` bcftools view -H FINAL_E1.vcf.gz | wc -l `
+44444
+
+
 # J-model test:
 
 ` /nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/bin/modeltest-ng-static -i FINAL_E1-.min4.fasta -d nt -p 120`
@@ -19,3 +25,7 @@
 # Start tree:
 
 ` SGE_Batch -q bpp@symbiosis -c '/nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/bin/raxml-ng --msa FINAL_E1-.min4.fasta -model TVM+G4 --prefix T1 --threads 20' -r T1 -P 20 `
+
+# Bootstrapping x 1000:
+
+` SGE_Batch -q bpp@symbiosis -c '/nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/bin/raxml-ng --bootstrap --msa T1.raxml.rba --model TVM+G4 --prefix T2 --threads 20 --bs-tree 1000' -r T2 -P 20 `
