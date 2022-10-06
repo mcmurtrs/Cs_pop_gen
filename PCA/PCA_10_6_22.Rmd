@@ -1,0 +1,198 @@
+---
+title: "Admixture_final_9_30_22"
+author: "Shawn McMurtrey"
+date: "9/23/2022"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+ # Edited from the Tabima et al. tutorial found here:
+ https://grunwaldlab.github.io/Population_Genetics_in_R/gbs_analysis.html
+
+
+```{r}
+library(vcfR)
+library(poppr)
+library(ape)
+library(RColorBrewer)
+```
+
+
+
+```{r}
+rubi.VCF <- read.vcfR("C:/Users/shawn/Desktop/FINAL.vcf.gz")
+```
+
+```{r}
+rubi.VCF
+```
+
+# If you get an error here try this: read.table wants to return a data.frame, which must have an element in each column. Therefore R expects each row to have the same number of elements and it doesn't fill in empty spaces by default. Try read.table("/PathTo/file.csv" , fill = TRUE ) to fill in the blanks.
+
+
+```{r}
+pop.data <- read.table("C:/Users/shawn/Desktop/population_data1.txt", sep = "\t", fill = TRUE, header = TRUE)
+```
+
+
+
+```{r}
+all(colnames(rubi.VCF@gt)[-1] == pop.data$AccessID)
+```
+
+```{r}
+gl.rubi <- vcfR2genlight(rubi.VCF)
+```
+
+
+
+
+```{r}
+ploidy(gl.rubi) <- 2
+```
+
+
+
+
+```{r}
+pop(gl.rubi) <- pop.data$Country
+```
+
+
+
+```{r}
+gl.rubi
+```
+
+```{r}
+x.dist <- poppr::bitwise.dist(gl.rubi)
+```
+
+
+
+
+```{r}
+rubi.pca <- glPca(gl.rubi, nf = 5)
+barplot(100*rubi.pca$eig/sum(rubi.pca$eig), col = heat.colors(50), main="PCA Eigenvalues")
+title(ylab="Percent of variance\nexplained", line = 2)
+title(xlab="Eigenvalues", line = 1)
+```
+```{r}
+tree <- aboot(gl.rubi, tree = "upgma", distance = bitwise.dist, sample = 100, showtree = F, cutoff = 50, quiet = T)
+```
+
+
+```{r}
+cols <- brewer.pal(n = nPop(gl.rubi), name = "Dark2")
+plot.phylo(tree, cex = 0.8, font = 2, adj = 0, tip.color =  cols[pop(gl.rubi)])
+nodelabels(tree$node.label, adj = c(1.3, -0.5), frame = "n", cex = 0.8,font = 3, xpd = TRUE)
+legend(35,10,c("Marys Peak","Apiary","Waldo Lake", "Matlock", "Sweet Home"),cols, border = FALSE, bty = "n")
+legend('topleft', legend = c("Marys Peak","Apiary","Waldo Lake", "Matlock", "Sweet Home"), fill = cols, border = FALSE, bty = "n", cex = 2)
+axis(side = 1)
+title(xlab = "Genetic distance (proportion of loci that are different)")
+```
+
+
+
+
+```{r}
+xval <- xvalDapc(gl.rubi, pop(gl.rubi), n.pca.max=100, n.rep=3)
+xval
+```
+
+
+
+
+
+
+```{r}
+rubi.pca$scores
+```
+
+
+```{r}
+mycolors <- c("#1B9e77", "#56B3E8", "#C8611F", "#8D6B86", "#DD2E8D", "#A66753", "#70A61B")
+rubi.pca.scores <- as.data.frame(rubi.pca$scores)
+rubi.pca.scores$pop <- pop(gl.rubi)
+library(ggplot2)
+set.seed(9)
+p <- ggplot(rubi.pca.scores, aes(x=PC1, y=PC2, colour=pop)) 
+p <- p + geom_point(size=1)
+p <- p + stat_ellipse(level = 0.95, size = 1)
+p <- p + scale_color_manual(values = mycolors) 
+p <- p + geom_hline(yintercept = 0) 
+p <- p + geom_vline(xintercept = 0) 
+p <- p + theme_classic()  
+p
+```
+
+```{r}
+predict.dapc()
+```
+```{r}
+xvalDapc(gl.rubi, grp, n.pca.max = 300, n.da = NULL,
+              training.set = 0.9, result = c("groupMean", "overall"),
+              center = TRUE, scale = FALSE,
+              n.pca=NULL, n.rep = 30, xval.plot = TRUE)
+```
+
+
+```{r}
+pnw.dapc <- dapc(gl.rubi, n.pca = 5, n.da = 100)
+```
+
+
+```{r}
+scatter(pnw.dapc, col = cols, cex = 2, legend = TRUE, clabel = F, posi.leg = "bottomleft", scree.pca = TRUE,
+        posi.pca = "topleft", cleg = 0.75)
+```
+
+
+```{r}
+#compoplot(pnw.dapc,col = function(x) cols, posi = 'top')
+compoplot(pnw.dapc,col = cols, posi = 'top')
+```
+
+```{r}
+dapc.results <- as.data.frame(pnw.dapc$posterior)
+dapc.results$pop <- pop(gl.rubi)
+dapc.results$indNames <- rownames(dapc.results)
+```
+
+
+
+
+```{r}
+# library(reshape2)
+# dapc.results <- melt(dapc.results)
+library(tidyr)
+dapc.results <- pivot_longer(dapc.results, -c(pop, indNames))
+```
+
+
+
+```{r}
+head(dapc.results, n = 6)
+```
+
+```{r}
+colnames(dapc.results) <- c("Original_Pop","Isolate","Assigned_Pop","Posterior_membership_probability")
+```
+
+
+```{r}
+is.numeric(dapc.results$Assigned_Pop)
+```
+
+
+
+
+
+```{r}
+mycolors <- c("#1B9e77", "#56B3E8", "#C8611F", "#8D6B86", "#DD2E8D", "#A66753", "#70A61B")
+p <- ggplot(dapc.results, aes(x=Isolate, y=Posterior_membership_probability, fill=Assigned_Pop)) 
+p <- p + geom_bar(stat='identity') +  scale_fill_manual(values=mycolors) 
+p <- p + facet_grid(~Original_Pop, scales = "free") 
+p <- p + theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 8))  
+p
+```
