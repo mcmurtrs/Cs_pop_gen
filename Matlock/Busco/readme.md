@@ -1,18 +1,18 @@
 
 
-# Mat 915-11
+# Mat 915-11......... 74.7% complete
 
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/f09e859f-2b76-4bc2-971d-ce5357893789)
 
-# MAT366-2
+# MAT366-2......... 70.7% complete
 
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/4fd305d0-55ce-4af5-a858-3e83a2da61ab)
 
-# Mat20-4
+# Mat20-4......... 72.8% complete
 
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/d97cd89d-aca8-4923-96ee-767bd0e0e32c)
 
-# Mat761-1
+# Mat761-1......... 90.5% complete
 
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/2a8cc080-b53a-4ebc-859e-d924bd33b2aa)
 
