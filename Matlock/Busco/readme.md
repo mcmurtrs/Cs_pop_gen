@@ -12,10 +12,6 @@
 
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/d97cd89d-aca8-4923-96ee-767bd0e0e32c)
 
-# Mat761-1......... 90.5% complete
-
-![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/2a8cc080-b53a-4ebc-859e-d924bd33b2aa)
-
 # MAT-763........... 76.6% complete
 
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/ef1baec1-a97f-4d31-8f76-8b7228b1019b)
@@ -23,3 +19,23 @@
 # MAT91_10_3....... 76.1% complete
 
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/b635158c-1c4e-4bfb-887b-6b20b1c068f5)
+
+# MAT91_1_13
+
+RUNNING BUSCO 17:57 AUG 6 2023
+
+# MAT91_1_12
+
+RUNNING BUSCO 18:14 AUG 6 2023
+
+# MAT91_7_2........... 96.3% complete
+
+![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/5268fc48-c418-4c6b-84f5-686e4c542b38)
+
+
+# MAT91_1_11
+
+
+
+# MAT911021
+
