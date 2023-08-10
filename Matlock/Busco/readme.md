@@ -20,13 +20,13 @@
 
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/b635158c-1c4e-4bfb-887b-6b20b1c068f5)
 
-# MAT91_1_13
+# MAT91_1_13....... 67.0% complete
 
-RUNNING BUSCO 17:57 AUG 6 2023
+![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/d7d6fd67-1752-4917-b99e-96047cf0fb26)
 
-# MAT91_1_12
+# MAT91_1_12........... 73.2% complete
 
-RUNNING BUSCO 18:14 AUG 6 2023
+
 
 # MAT91_7_2........... 96.3% complete
 
