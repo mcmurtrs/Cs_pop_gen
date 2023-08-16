@@ -26,6 +26,7 @@
 
 # MAT91_1_12........... 73.2% complete
 
+![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/a3b1514b-93cb-49a3-9865-441063810989)
 
 
 # MAT91_7_2........... 96.3% complete
