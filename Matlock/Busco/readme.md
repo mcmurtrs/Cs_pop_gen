@@ -42,3 +42,22 @@ Started 12:13 08/10/2023
 # MAT911021
 
 Started 12:14 08/10/2023
+
+# Subsamples of larger fasta files
+
+## Directory
+
+``` /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/De_novo/Mat915-11_Ass ```
+
+## Print first 1,700 lines into a new file
+
+``` ( head -1700 Mat915-11.spades_COPY.fasta > Mat915-11_First_1700.fasta )  ```
+
+## Directory
+
+```/nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/De_novo/MAT366-2_Ass```
+
+
+## Print first 1,700 lines into a new file
+
+``` ( head -1700 MAT366-2_COPY.spades.fasta > MAT366-2_Firstst_1700.fasta )  ```
