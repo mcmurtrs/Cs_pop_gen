@@ -45,6 +45,10 @@ Started 12:14 08/10/2023
 
 # Subsamples of larger fasta files
 
+# BRIG
+# Change this value before doing final analysis!!!!
+![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/ce61f03b-babf-44e7-8e1e-b3e231a7c64d)
+
 
 ## REFERENCE
 
@@ -71,3 +75,5 @@ Started 12:14 08/10/2023
 ## Print first 1,700 lines into a new file
 
 ``` ( head -1700 MAT366-2_COPY.spades.fasta > MAT366-2_Firstst_1700.fasta )  ```
+
+
