@@ -45,6 +45,16 @@ Started 12:14 08/10/2023
 
 # Subsamples of larger fasta files
 
+
+## REFERENCE
+
+### Directory
+
+```/nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/REFERENCE```
+## Print first 1,700 lines into a new file
+
+``` ( head -1700 GCA_002794785.1_PSUO.v3_genomic.fna > GCA_002794785_First_1700.fasta )
+ ```
 ## Directory
 
 ``` /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/De_novo/Mat915-11_Ass ```
