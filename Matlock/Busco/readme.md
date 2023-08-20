@@ -76,4 +76,8 @@ Started 12:14 08/10/2023
 
 ``` ( head -1700 MAT366-2_COPY.spades.fasta > MAT366-2_Firstst_1700.fasta )  ```
 
+# MAFFT
+```
+cat Mat915-11.spades.fasta Mat20-4.spades.fasta MAT366-2.spades.fasta MAT-763.spades.fasta MAT91_10_3.spades.fasta MAT91_1_11.spades.fasta MAT91_1_12.spades.fasta MAT91_1_13.spades.fasta MAT91_7_2.spades.fasta > ALL.fasta
 
+SGE_Batch -c "/local/cluster/mafft-7.487/mafft ALL.fasta > ALL.msa" -P 20 -r MATLOCK_GENOMES_MSA
