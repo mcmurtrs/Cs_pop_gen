@@ -34,14 +34,15 @@
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/5268fc48-c418-4c6b-84f5-686e4c542b38)
 
 
-# MAT91_1_11
+# MAT91_1_11......... 76.7% complete
 
-Started 12:13 08/10/2023
+![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/25035513-59c0-4948-aa29-95d4091fddc2)
 
 
-# MAT911021
+# MAT911021......... 86.4% complete
 
-Started 12:14 08/10/2023
+![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/52578e48-b6fa-456c-86e0-cc0207ce2727)
+
 
 # Subsamples of larger fasta files
 
