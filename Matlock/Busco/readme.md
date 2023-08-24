@@ -124,6 +124,8 @@ ECAVESYRAKNDMVNPVLAGFMAGGILARNSGPKAALGGGAAFAAFSAAIDLFLRRESSE
 
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/fe8c0589-8bca-4333-b36a-9667cb1ac9b2)
 
+![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/e63c5779-778c-4b3e-8c6e-0df8afdabfca)
+
 
 ## 79371at5204
 ```
@@ -133,8 +135,8 @@ KGFQLLGALSNDKPSAIFRLRGAFSTQPSLAHAAFQAPGANAPSDGDANAILGISVEPFA
 AIQAQLATLPSAVARPAAPAEPTVLAEKIVKHLFNFLSSFAADGTTGVGLTPDSYVQMRA
 VTRWYESFMSKIRAGGAGFLDRQE
 
-
 ```
 
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/ff94fe1d-5c89-4f19-957e-17393d943778)
 
+![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/a18852ee-777a-4eea-8ad4-a0ed7bdb0a2f)
