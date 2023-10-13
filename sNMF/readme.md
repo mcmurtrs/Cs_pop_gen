@@ -45,6 +45,21 @@ geno.input <- ped2geno(input.ped, output.file = "C:/Users/shawn/Desktop/Cs_only.
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/27ea96f3-956f-49c8-ad91-ff9f41bcedde)
 
 ## Step four: with all files and file formats needed, start the sMNF analysis:
-- Following the graciously provided tutorial found here:
 
-https://connor-french.github.io/intro-pop-structure-r/
+- Following the graciously provided tutorial found here:
+` https://connor-french.github.io/intro-pop-structure-r/ `
+
+# First sNMF run
+```{r}
+
+Cs_snmf <- snmf(input.file = "C:/Users/shawn/Desktop/Cs_only.geno",
+                   K = 1:15,
+                   entropy = TRUE,
+                   repetitions = 5,
+                   project = "new",
+                   alpha = 100
+                  )
+
+```
+
+
