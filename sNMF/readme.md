@@ -9,7 +9,26 @@ plink --vcf C_sulph_only_FINAL_copy.vcf --double-id --recode --out myplink1
 
 ```
 
+
 ## Step two: convert .ped file to .geno files with LEA package:
+
+```{r}
+input.ped <- ("C:/Users/shawn/Desktop/myplink1.ped")
+
+```
+
+
+```{r}
+lfmm.input <- ped2lfmm(input.ped, output.file = "C:/Users/shawn/Desktop/mylfmm.lfmm", force = TRUE)
+```
+
+- Screenshot of lfmm file:
+
+![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/b9339c7c-b3f9-4d83-941d-0f6a1a64b92d)
+
+
+
+## Step three: convert .ped file to .geno files with LEA package:
 
 - What is a ped file?
 
