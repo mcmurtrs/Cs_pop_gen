@@ -44,6 +44,13 @@ geno.input <- ped2geno(input.ped, output.file = "C:/Users/shawn/Desktop/Cs_only.
 
 ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/27ea96f3-956f-49c8-ad91-ff9f41bcedde)
 
+- Add samples names to row one in each column using excel.
+- The geno file should now look like this:
+
+  ![image](https://github.com/mcmurtrs/Cs_pop_gen/assets/49656044/b78c8427-b7ef-42a8-9313-d4748b74fafd)
+
+
+
 ## Step four: with all files and file formats needed, start the sMNF analysis:
 
 - Following the graciously provided tutorial found here:
