@@ -1,0 +1,895 @@
+---
+title: "SNP_tree_oct19"
+output: html_document
+editor_options: 
+  
+  chunk_output_type: console
+---
+```{r}
+library(ape)
+library(phangorn)
+library(ggtree)
+library(RColorBrewer)
+library(ggplot2)
+library(ggrepel)
+
+```
+
+
+
+
+
+
+
+
+
+# Read the tree into R
+```{r}
+
+
+#Final version Cs and Cw
+
+#T3.raxml_90_samples.support
+#myTree <- read.tree("C:/Users/shawn/Desktop/T3.raxml.91_taxa.support_copy")
+myTree <- read.tree("C:/Users/shawn/Desktop/90_taxa_FINAL.support")
+```
+
+
+
+
+## Rerooting the tree
+```{r}
+
+myTree <- midpoint(myTree)
+```
+
+
+
+
+```{r}
+myTree <- root(myTree, outgroup = "C_qilanensis", edgelabel = TRUE)
+```
+
+
+# Add labels with fortify
+```{r}
+myTree.fort <- fortify(myTree)
+myTree.fort$bootstrap <- NA
+myTree.fort$bootstrap[!myTree.fort$isTip]<-myTree$node.label
+
+```
+
+
+```{r}
+class(myTree.fort$bootstrap)
+myTree.fort$bootstrap <- as.factor(myTree.fort$bootstrap)
+class(myTree.fort$bootstrap)
+```
+
+
+## Filter bootstrap labels to remove those less than 70
+
+```{r}
+q3 <- ggtree(myTree.fort)
+d3 <- q3$data
+d3 <- d3[!d3$isTip,]
+d3$label <- as.numeric(d3$label)
+d3 <- d3[d3$label > 70,]
+```
+
+
+# Remove first blank row from data frame (it throws an error later on.. i.e 1: In FUN(X[[i]], ...) : NAs introduced by coercion)
+```{r}
+d3 <- d3[-1,]
+d3
+```
+
+
+
+
+
+
+
+
+#Use this one
+```{r}
+# The tree
+q3 +
+  
+
+# Add ML values > 70  
+ geom_nodepoint(data=d3,size=2,shape=21,aes(fill=cut(as.numeric(bootstrap),c(70,80,90,Inf),right=F, include.lowest=T)))+
+  
+
+# Tree tip labels
+geom_tiplab(aes(color=label)) +
+  geom_tiplab(size=0.8,aes(color=label))+
+  
+
+# Tree scale bar
+geom_treescale(x=0,y=-5,width=.1,fontsize=4,offset=-1.1) +
+  
+  #Override colors and turn to grey scale 
+scale_fill_manual(name = "Bootstrap support",values = c("white","grey60","black"), labels = c("70-79", "80-89", "90-100"))+
+  
+# Legend 
+guides(colour=guide_legend(override.aes=list(size=10,shape=16,alpha=1))) +
+  
+# Legend position
+theme_tree(legend.position=c(0.2,0.75),legend.text=element_text(size=12),legend.title=element_text(size=12),text=element_text(size=12,face="bold"),legend.margin=margin(t = 0, unit='cm'),legend.box.margin=margin(t = 0, unit='cm'))
+  
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Nodes
+```{r}
+# The tree
+q3 +
+  
+# Add ML values > 70  
+ geom_nodepoint(data=d3,size=4,shape=21,aes(fill=cut(as.numeric(bootstrap),c(70,80,90, I),right=F, include.lowest=T)))+
+  
+    geom_tiplab(size=3,fontface="bold",show.legend=FALSE)+
+  
+
+
+    #Override colors and turn to grey scale 
+scale_fill_manual(name = "Bootstrap support",values = c("white","grey60","black"), labels = c("0-50", "80-89", "90-100"))+
+  
+
+
+# Tree scale bar
+geom_treescale(x=0,y=-5,width=.1,fontsize=4,offset=-1.1) +
+  
+
+# Legend 
+guides(colour=guide_legend(override.aes=list(size=10,shape=16,alpha=1))) +
+  
+# Legend position
+theme_tree(legend.position=c(5.2,0.75),legend.text=element_text(size=12),legend.title=element_text(size=12),text=element_text(size=12,face="bold"),legend.margin=margin(t = 0, unit='cm'),legend.box.margin=margin(t = 0, unit='cm'))
+  
+
+```
+
+
+
+
+
+
+
+
+
+#Use this one
+```{r}
+# The tree
+q3 +
+  
+
+# Add ML values > 70  
+ geom_nodepoint(data=d3,size=2,shape=21,aes(fill=cut(as.numeric(bootstrap),c(70,80,90,Inf),right=F, include.lowest=T)))+
+  
+
+# Tree tip labels
+geom_tiplab(aes(color=label))+
+  scale_color_manual(values=c("blue",
+"#F0E442", # Yellow 20_20
+"#999999", #Grey A-3
+"#999999", #Grey A-3
+"#E69F00", #Orange Apiary #A2
+"#999999", #80502
+"black", #Mat915-11
+"black", #Mat20-4
+"black", #Mat20-4
+"#999999",
+"#999999",
+"#999999",
+"#999999",
+"#999999",
+"#999999", #A-2
+"#999999", # AP7
+"#999999", #Ap9
+"#E69F00", #B1 California
+"#E69F00", #B2 British Columbia
+"#009E73", #C1 Montana
+"#009E73", #C2 WF1STP2 ( California
+"black", #Jacks6
+"blue",
+"blue",
+"blue",
+"black", #Mat
+"black", #Mat
+"black", # Mat20-4
+"black", #Mat
+"black", #Mat
+"black", #Mat
+"black", #Mat
+"black", #Mat
+"black",
+"black",
+"black",
+"black",
+"black",
+"black",
+"black",
+"black",
+"#999933", #ML35
+"#999933", #ML26
+"#F0E442", #MP
+"#F0E442", #MP
+"#F0E442",
+"#F0E442",
+"#F0E442",
+"#F0E442",
+"#F0E442",
+"#F0E442",
+"#F0E442", #MP
+"green", # C_weirii BC
+"green", # C_weirii BC
+"green", # C_sulphurascens BC
+"blue",
+"blue",
+"blue",
+"blue",
+"blue",
+"blue",
+"blue",
+"blue",
+"#0072B2", # Light Blue PWT
+"#0072B2", # Light Blue PWT
+"#0072B2", # Light Blue PWT
+"#0072B2", # Light Blue PWT63
+"#F0E442", # Yellow S1S1
+"#CC79A7",
+"#CC79A7",
+"#CC79A7",
+"#CC79A7",
+"#CC79A7",
+"#CC79A7",
+"#CC79A7",
+"#CC79A7",
+"#CC79A7",
+"#CC79A7",
+"#CC79A7",
+"#D55E00",
+"#D55E00",
+"#D55E00",
+"#D55E00",
+"#D55E00",
+"#D55E00",
+"#D55E00",
+"#D55E00",
+"#D55E00",
+"#D55E00",
+"#D55E00",
+"#D55E00",
+"#D55E00",
+"#D55E00"
+), label=c("whatever you want","more what ever"))+
+  geom_tiplab(size=0.8,aes(color=label))+
+  
+
+# Tree scale bar
+geom_treescale(x=0,y=-5,width=.1,fontsize=4,offset=-1.1) +
+  
+  #Override colors and turn to grey scale 
+scale_fill_manual(name = "Bootstrap support",values = c("white","grey60","black"), labels = c("70-79", "80-89", "90-100"))+
+  
+# Legend 
+guides(colour=guide_legend(override.aes=list(size=10,shape=16,alpha=1))) +
+  
+# Legend position
+theme_tree(legend.position=c(0.2,0.75),legend.text=element_text(size=12),legend.title=element_text(size=12),text=element_text(size=12,face="bold"),legend.margin=margin(t = 0, unit='cm'),legend.box.margin=margin(t = 0, unit='cm'))
+  
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+library(ape)
+library(phangorn)
+library(ggtree)
+library(RColorBrewer)
+library(ggplot2)
+library(ggrepel)
+
+```
+
+
+
+
+
+
+
+
+
+# Read the tree into R
+```{r}
+
+
+#Final version Cs and Cw
+
+
+myTree <- read.tree("C:/Users/shawn/Desktop/T3.raxml_90_samples.support")
+
+```
+
+
+
+
+## Rerooting the tree
+```{r}
+
+myTree <- midpoint(myTree)
+```
+
+
+
+
+
+# Add labels with fortify
+```{r}
+myTree.fort <- fortify(myTree)
+myTree.fort$bootstrap <- NA
+myTree.fort$bootstrap[!myTree.fort$isTip]<-myTree$node.label
+
+```
+
+
+```{r}
+class(myTree.fort$bootstrap)
+myTree.fort$bootstrap <- as.factor(myTree.fort$bootstrap)
+class(myTree.fort$bootstrap)
+```
+
+
+## Filter bootstrap labels to remove those less than 70
+
+```{r}
+q3 <- ggtree(myTree.fort)
+d3 <- q3$data
+d3 <- d3[!d3$isTip,]
+d3$label <- as.numeric(d3$label)
+d3 <- d3[d3$label > 70,]
+```
+
+
+# Remove first blank row from data frame (it throws an error later on.. i.e 1: In FUN(X[[i]], ...) : NAs introduced by coercion)
+```{r}
+d3 <- d3[-1,]
+d3
+```
+
+
+
+
+
+
+
+
+#Use this one
+```{r}
+# The tree
+q3 +
+  
+
+# Add ML values > 70  
+ geom_nodepoint(data=d3,size=2,shape=21,aes(fill=cut(as.numeric(bootstrap),c(70,80,90,Inf),right=F, include.lowest=T)))+
+  
+
+# Tree tip labels
+geom_tiplab(aes(color=label)) +
+  geom_tiplab(size=0.8,aes(color=label))+
+  
+
+# Tree scale bar
+geom_treescale(x=0,y=-5,width=.1,fontsize=4,offset=-1.1) +
+  
+  #Override colors and turn to grey scale 
+scale_fill_manual(name = "Bootstrap support",values = c("white","grey60","black"), labels = c("70-79", "80-89", "90-100"))+
+  
+# Legend 
+#guides(colour=guide_legend(override.aes=list(size=10,shape=16,alpha=1))) +
+  
+# Legend position
+theme_tree(legend.position=c(0.2,0.75),legend.text=element_text(size=12),legend.title=element_text(size=12),text=element_text(size=12,face="bold"),legend.margin=margin(t = 0, unit='cm'),legend.box.margin=margin(t = 0, unit='cm'))
+  
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Nodes
+```{r}
+# The tree
+q3 +
+  
+# Add ML values > 70  
+ geom_nodepoint(data=d3,size=4,shape=21,aes(fill=cut(as.numeric(bootstrap),c(70,80,90, I),right=F, include.lowest=T)))+
+  
+    geom_tiplab(size=3,fontface="bold",show.legend=FALSE)+
+  
+
+
+    #Override colors and turn to grey scale 
+scale_fill_manual(name = "Bootstrap support",values = c("white","grey60","black"), labels = c("0-50", "80-89", "90-100"))+
+  
+
+
+# Tree scale bar
+geom_treescale(x=0,y=-5,width=.1,fontsize=4,offset=-1.1) +
+  
+
+# Legend 
+guides(colour=guide_legend(override.aes=list(size=10,shape=16,alpha=1))) +
+  
+# Legend position
+theme_tree(legend.position=c(5.2,0.75),legend.text=element_text(size=12),legend.title=element_text(size=12),text=element_text(size=12,face="bold"),legend.margin=margin(t = 0, unit='cm'),legend.box.margin=margin(t = 0, unit='cm'))
+  
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Use this one
+```{r}
+# The tree
+q3 +
+  
+
+# Add ML values > 70  
+ geom_nodepoint(data=d3,size=2,shape=21,aes(fill=cut(as.numeric(bootstrap),c(70,80,90,Inf),right=F, include.lowest=T)))+
+  
+
+  # #FF0000 Apiary
+  # F8766D  #California
+  #CD9600 Canada
+  #00BE67 Idaho
+  
+  # 00BFC4  #Japan
+  #         #Matlock
+  # 00A7FC # Montana
+  
+  # C67BFE  #MP
+  # FF61CC # Russia
+  # 440154 #Sweet Home
+ 
+  # 7CAE00  #Waldo
+  # Washington
+
+
+
+
+
+# Tree tip labels
+geom_tiplab(aes(color=label))+
+  scale_color_manual(values=c("#00A7FC", #071101
+"#00BE67", #30910
+"#00A7FC", #71102
+"#00A7FC", #71103
+"#00A7FC", #71104
+"#00A7FC", #80502
+"#00A7FC", #80501
+"#FF0000", # Apiary A-2
+"#FF0000",
+"#FF0000",
+"#FF0000",
+"#FF0000",
+"#FF0000",
+"#FF0000",
+"#FF0000", # AP7
+"#FF0000", #Ap9
+"#FF0000", #AP34
+"#FF0000", #AP36
+"#FF0000", #AP7
+"#FF0000", #AP
+"#00BE67", #ID134696
+"#F8766D", #Jacks6_ California
+"#00BFC4", #Japan
+"#00BFC4", #Japan
+"#00BFC4", #Japan
+"#7CAE00",# Matlock 763_2
+"#7CAE00", 
+"#7CAE00",
+"#7CAE00",
+"#7CAE00",
+"#7CAE00",
+"#7CAE00",
+"#7CAE00",
+"#7CAE00",
+"#7CAE00", #Mat915-11
+"#FF61CC", #ML36
+"#C67BFE", #MP1
+"#C67BFE", #MP
+"#C67BFE", #MP11
+"#C67BFE", #MP12
+"#C67BFE", #MP13
+"#C67BFE", #MP14
+"#C67BFE", #MP
+"#C67BFE", #MP
+"#C67BFE", #MP5
+"#C67BFE", #MP6
+"#CD9600", #PFC501
+"#CD9600", #PFC504
+"#CD9600", #PFC506
+"#CD9600", #PFC514
+"#CD9600", #PFC539
+"#CD9600", # C_weirii BC
+"#CD9600", # C_weirii BC
+"#CD9600", # C_sulphurascens BC
+"#CD9600", #PFC557
+"#F8766D",#PS5WF California
+"#F8766D", #PS7WF California
+"#A02929", #PWT102
+"#A02929", #PWT115
+"#A02929", #PWT128
+"#A02929", #PWT124
+"#A02929", #PWT164
+"#A02929", #PWT63
+"#C67BFE", #S1S1
+"#440154", # Sweet Home
+"#440154", # Sweet Home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", # sweet home
+"#440154", #Sweet home
+"#3B528B", #waldo WIA2
+"#3B528B", #waldo
+"#3B528B", #Waldo
+"#F8766D", #WF1STP2_California?
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #WVD1
+"#3B528B" # Waldo WVL2
+
+), label=c("Apiary","California", "Canada", "Japan", "Marys Peak", "Matlock", "Montana", "Russia", "Sweet Home", " Waldo Lake", "Washington"))+
+  geom_tiplab(size=.0,aes(color=label))+
+  
+
+# Tree scale bar
+geom_treescale(x=0,y=-15,width=.1,fontsize=4,offset=-2.5) +
+  
+  #Override colors and turn to grey scale 
+scale_fill_manual(name = "Bootstrap support",values = c("white","grey60","black"), labels = c("70-79", "80-89", "90-100"))+
+  
+# Legend 
+#guides(colour=guide_legend(override.aes=list(size=10,shape=16,alpha=1))) +
+  
+# Legend position
+theme_tree(legend.position=c(5.2,0.75),legend.text=element_text(size=12),legend.title=element_text(size=12),text=element_text(size=12,face="bold"),legend.margin=margin(t = 0, unit='cm'),legend.box.margin=margin(t = 0, unit='cm'))
+  
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+#Use this one
+```{r}
+# The tree
+q3 +
+  
+
+# Add ML values > 70  
+ geom_nodepoint(data=d3,size=2,shape=21,aes(fill=cut(as.numeric(bootstrap),c(70,80,90,Inf),right=F, include.lowest=T)))+
+  
+
+  # #FF0000 Apiary
+  # F8766D  #California
+  #CD9600 Canada
+  #00BE67 Idaho
+  
+  # 00BFC4  #Japan
+  #         #Matlock
+  # 00A7FC # Montana
+  
+  # C67BFE  #MP
+  # FF61CC # Russia
+  # 440154 #Sweet Home
+ 
+  # 7CAE00  #Waldo
+  # A52A2A Washington
+
+
+
+
+
+# Tree tip labels
+geom_tiplab(aes(color=label))+
+  scale_color_manual(values=c("#00A7FC", #071101
+"#00BE67", #30910
+"#00A7FC", #71102
+"#00A7FC", #71103
+"#00A7FC", #71104
+"#00A7FC", #80502
+"#00A7FC", #80501
+"#FF0000", # Apiary A-2
+"#FF0000",
+"#FF0000",
+"#FF0000",
+"#FF0000",
+"#FF0000",
+"#FF0000",
+"#FF0000", # AP7
+"#FF0000", #Ap9
+"#FF0000", #AP34
+"#FF0000", #AP36
+"#FF0000", #AP7
+"#FF0000", #AP
+"#00BE67", #ID134696
+"#F8766D", #Jacks6_ California
+"#00BFC4", #Japan
+"#00BFC4", #Japan
+"#00BFC4", #Japan
+"#7CAE00",# Matlock 763_2
+"#7CAE00", 
+"#7CAE00",
+"#7CAE00",
+"#7CAE00",
+"#7CAE00",
+"#7CAE00",
+"#7CAE00",
+"#7CAE00",
+"#7CAE00", #Mat915-11
+"#FF61CC", #ML36
+"#C67BFE", #MP1
+"#C67BFE", #MP
+"#C67BFE", #MP11
+"#C67BFE", #MP12
+"#C67BFE", #MP13
+"#C67BFE", #MP14
+"#C67BFE", #MP
+"#C67BFE", #MP
+"#C67BFE", #MP5
+"#C67BFE", #MP6
+"#CD9600", #PFC501
+"#CD9600", #PFC504
+"#CD9600", #PFC506
+"#CD9600", #PFC514
+"#CD9600", #PFC539
+"#CD9600", # C_weirii BC
+"#CD9600", # C_weirii BC
+"#CD9600", # C_sulphurascens BC
+"#CD9600", #PFC557
+"#F8766D",#PS5WF California
+"#F8766D", #PS7WF California
+"#A02929", #PWT102
+"#A02929", #PWT115
+"#A02929", #PWT128
+"#A02929", #PWT124
+"#A02929", #PWT164
+"#A02929", #PWT63
+"#C67BFE", #S1S1
+"#440154", # Sweet Home
+"#440154", # Sweet Home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", #sweet home
+"#440154", # sweet home
+"#440154", #Sweet home
+"#3B528B", #waldo WIA2
+"#3B528B", #waldo
+"#3B528B", #Waldo
+"#F8766D", #WF1STP2_California?
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #Waldo 
+"#3B528B", #WVD1
+"#3B528B" # Waldo WVL2
+
+), label=c("Apiary","California", "Canada", "Idaho", "Japan", "Marys Peak", "Matlock", "Montana", "Russia", "Sweet Home", "Waldo Lake", "Washington"))+
+  
+  
+
+    #Override colors and turn to grey scale 
+scale_fill_manual(name = "Bootstrap support",values = c("white","grey60","black"), labels = c("0-50", "80-89", "90-100"))+
+  
+
+
+# Tree scale bar
+geom_treescale(x=0,y=-5,width=.1,fontsize=4,offset=-1.1) +
+  
+
+# Legend 
+guides(colour=guide_legend(override.aes=list(size=10,shape=16,alpha=1))) +
+  
+# Legend position
+theme_tree(legend.position=c(5.2,0.75),legend.text=element_text(size=12),legend.title=element_text(size=12),text=element_text(size=12,face="bold"),legend.margin=margin(t = 0, unit='cm'),legend.box.margin=margin(t = 0, unit='cm')) +
+  
+
+   
+q3 + legend("top left", inset=.02, title="Number of Cylinders",
+   c("4","6","8"), fill=topo.colors(3), horiz=TRUE, cex=0.8)+
+  
+    scale_fill_identity(name = 'the fill', guide = 'legend',
+                        labels = c('m1')) +
+    scale_colour_manual(name = 'the colour', 
+         values =c('black'='black','red'='red'), labels = c('c2','c1'))
+
+
+
+```
+
+
+
+
+
+
+
+```{r}
+
+
+
+# The tree
+q3 + 
+
+# Add ML values > 70
+geom_nodelab(aes(y=branch,  label = label, subset =   !is.na(as.numeric(label)) & as.numeric(label) >70), vjust=-.5, size=.1) +
+  
+# Tree tip labels
+geom_tiplab(size = 2) +
+  
+# Bootstrap values  
+geom_nodepoint(data=d3,size=2,shape=21,aes(fill=cut(as.numeric(bootstrap),c(70,80,90,100),left=T, include.lowest=T))) +
+  
+# Override colors and turn to grey scale 
+#scale_fill_manual(name = "Bootstrap support",values = #c("white","grey60","black"),labels = c("70-79", "80-89", "90-100"))+
+  
+# Legend 
+guides(colour=guide_legend(override.aes=list(size=10,shape=16,alpha=1))) +
+  
+# Legend position
+theme_tree(legend.position=c(0.6,5.75),legend.text=element_text(size=12),legend.title=element_text(size=12),text=element_text(size=12,face="bold"),legend.margin=margin(t = 0, unit='cm'),legend.box.margin=margin(t = 0, unit='cm'))+ 
+  
+# Tree scale bar
+geom_treescale(x=.5,y=-15,width=.5,fontsize=3,offset=0.5)
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+## Visualize tree with ggtree
+
+```{r, warning=FALSE, fig.height=16,fig.width=8.5}
+RAXtre<-q3
+RAXtre<-RAXtre %<+% pop_metadata+
+  geom_tiplab(aes(color=Site), size=3,offset = 0.005,fontface="bold",show.legend=FALSE)+
+  #geom_text_repel(data=d3,aes(label=label),size=3,nudge_x=-0.05,nudge_y=0.05)+
+  geom_tippoint(aes(color=Site),size=0,alpha=0,shape=16)+
+  scale_color_manual(values=brewer.pal(n=6,name="Dark2"),labels=c("BL","DC","MP","FG","RB","SP"), name="Plantation")+
+  geom_nodepoint(data=d3,size=2,shape=21,aes(fill=cut(as.numeric(bootstrap),c(70,80,90,Inf),right=F, include.lowest=T)))+
+  scale_fill_manual(name = "Bootstrap support",values = c("white","grey60","black"),labels = c("70-79", "80-89", "90-100"))+
+  guides(colour=guide_legend(override.aes=list(size=10,shape=16,alpha=1)))+
+  theme_tree(legend.position=c(0.2,0.75),legend.text=element_text(size=12),legend.title=element_text(size=12),text=element_text(size=12,face="bold"),legend.margin=margin(t = 0, unit='cm'),legend.box.margin=margin(t = 0, unit='cm'))+
+  xlim(0,1.7)+
+  geom_treescale(x=0.075,y=-5,width=0.5,fontsize=3,offset=0.5)
+RAXtre
+```
+
+
+
+
+
+
