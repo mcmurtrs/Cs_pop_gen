@@ -37,7 +37,7 @@ Read 1 AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
 Read 2 AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
 
 ### References: 
-- Mark Dasenko, page 30 from the following document.
+- Per Mark Dasenko, the adapters used for all Illumina runs are listed above and can be found on page 30 from the following document.
 - https://github.com/LeBoldus-Lab/C.-sulphurascens-Project/blob/master/Illumina%20Sequencing/Step%201:%20QC%20of%20Reads/illumina-adapter-sequences-1000000002694-13.pdf
 
 
