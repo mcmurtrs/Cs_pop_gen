@@ -66,14 +66,8 @@ cutadapt -q 15,10 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -A AGATCGGAAGAGCGTCGTGTAG
 
 ### Script 4: Trim low quality reads with Trimmomatic (http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf)
 - Used Trimmomatic (version 0.32)
-- For Trimmomatic the following parameters were used `LEADING:30 TRAILING:30 MINLEN of 25, and SLIDINGWINDOW:4:20`
+- For Trimmomatic the following parameters were used `MINLEN of 25, and SLIDINGWINDOW:4:20`
 
-
-### Trimmomatic References: 
- 
-- Bolger, A. M., Lohse, M., & Usadel, B. (2014). Trimmomatic: a flexible trimmer for Illumina sequence
-data. Bioinformatics, 30(15), 2114-2120. doi:10.1093/bioinformatics/btu170
-- Chung, Chia-Lin; Lee, Tracy J.; Akiba, Mitsuteru; Lee, Hsin-Han; Kuo, Tzu-Hao; Liu, Dang; Ke, Huei-Mien; Yokoi, Toshiro; Roa, Marylette B; Lu, Meiyeh J; Chang, Ya-Yun; Ann, Pao-Jen; Tsai, Jyh-Nong; Chen, Chien-Yu; Tzean, Shean-Shong; Ota, Yuko; Hattori, Tsutomu; Sahashi, Norio; Liou, Ruey-Fen; Kikuchi, Taisei; Tsai, Isheng J (2017). Comparative and population genomics landscape of <i>Phellinus noxius</i> : a hypervariable fungus causing root rot in trees. Molecular Ecology, (), –. doi:10.1111/mec.14359 
 
 ```
 bash
@@ -122,43 +116,20 @@ CPU=8
 
 
 
-#Trim Adapters
+#Trim low quality reads:
 java -jar trimmomatic-0.39.jar PE -phred33 -threads 4 $R1_RAW $R2_RAW $R1_TRIM $R1_UNTRIM $R2_TRIM $R2_UNTRIM SLIDINGWINDOW:4:20 MINLEN:25
 ```
 
 
-# Trimmomatic backup script:
 
-``` 
-#!/bin/bash
-#$ -N JustKeepTrimming
-#$ -V
-#$ -pe thread 8
-#$ -cwd
-#$ -S /bin/bash
-#$ -l mem_free=128G
-#$ -t 1-28:1
-i=$(expr $SGE_TASK_ID - 1)
-FILE=( `cat /nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/bin/Trimmomatic-0.39/reads_list_new.txt`)
-IFS=';' read -r -a arr <<< "${FILE[$i]}"
+### Trimmomatic References: 
+ 
+- Bolger, A. M., Lohse, M., & Usadel, B. (2014). Trimmomatic: a flexible trimmer for Illumina sequence
+data. Bioinformatics, 30(15), 2114-2120. doi:10.1093/bioinformatics/btu170
+- Chung, Chia-Lin; Lee, Tracy J.; Akiba, Mitsuteru; Lee, Hsin-Han; Kuo, Tzu-Hao; Liu, Dang; Ke, Huei-Mien; Yokoi, Toshiro; Roa, Marylette B; Lu, Meiyeh J; Chang, Ya-Yun; Ann, Pao-Jen; Tsai, Jyh-Nong; Chen, Chien-Yu; Tzean, Shean-Shong; Ota, Yuko; Hattori, Tsutomu; Sahashi, Norio; Liou, Ruey-Fen; Kikuchi, Taisei; Tsai, Isheng J (2017). Comparative and population genomics landscape of <i>Phellinus noxius</i> : a hypervariable fungus causing root rot in trees. Molecular Ecology, (), –. doi:10.1111/mec.14359 
 
-ASSPATH=${arr[0]}_Ass
-R1_RAW=${arr[1]}
-R2_RAW=${arr[2]}
-R1_UNTRIM=${arr[0]}_1P_untrim.fastq.gz
-R2_UNTRIM=${arr[0]}_2P_untrim.fastq.gz
-R1_TRIM=${arr[0]}_1P_trim.fastq.gz
-R2_TRIM=${arr[0]}_2P_trim.fastq.gz
-R1_FILTER=$ASSPATH/${arr[0]}_filtered_1.fastq.gz
-R2_FILTER=$ASSPATH/${arr[0]}_filtered_2.fastq.gz
-CPU=8
 
-#mkdir ${arr[0]}_Ass
 
-#Trim Adapters
-java -jar trimmomatic-0.39.jar PE -phred33 -threads 4 $R1_RAW $R2_RAW $R1_TRIM $R1_UNTRIM $R2_TRIM $R2_UNTRIM SLIDINGWINDOW:4:20 MINLEN:25
-
-```
 
 
 ### Script 5 : FastQC on Trimmed/Filtered Reads
