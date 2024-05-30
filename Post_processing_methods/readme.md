@@ -61,7 +61,7 @@ R2_TRIM=${arr[0]}_2P.fastq.gz
 CPU=8
 
 #Trim Adapters
-```cutadapt -q 15,10 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -o $R1_TRIM -p $R2_TRIM $R1_RAW $R2_RAW
+cutadapt -q 15,10 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT -o $R1_TRIM -p $R2_TRIM $R1_RAW $R2_RAW
 ```
 
 ### Script 4: Trim low quality reads with Trimmomatic (http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf)
