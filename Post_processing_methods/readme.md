@@ -1,15 +1,15 @@
 ## Script 1: Copy reads from CGRB to LeBoldus Lab directory
 
 ### Illumina #1532, Completed 5/3/21
-```cp -r /nfs2/hts/illumina/210430_J00107_0276_AHKNCYBBXY_1532/L2 /nfs1/BPP/LeBoldus_Lab/lab_data/coniferiporia```
+```cp -r /nfs2/hts/illumina/210430_J00107_0276_AHKNCYBBXY_1532/L2 /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/coniferiporia```
 - FastQC Report: http://hts.cgrb.oregonstate.edu/illumina/210430_J00107_0276_AHKNCYBBXY_1532-L2/
 
 ### Illumina #1547, Completed 9/6/21
-```cp -r /nfs2/hts/illumina/210902_J00107_0291_AHLL2WBBXY_1547/L2456 /nfs1/BPP/LeBoldus_Lab/lab_data/coniferiporia```
+```cp -r /nfs2/hts/illumina/210902_J00107_0291_AHLL2WBBXY_1547/L2456 /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/coniferiporia```
 - FastQC Report: http://hts.cgrb.oregonstate.edu/illumina/210902_J00107_0291_AHLL2WBBXY_1547-L2456/
 
 ### Illumina #1549, Completed 10/1/21
-```cp -r /nfs2/hts/illumina/210927_J00107_0293_AHLLT7BBXY_1549/L1 /nfs1/BPP/LeBoldus_Lab/lab_data/coniferiporia```
+```cp -r /nfs2/hts/illumina/210927_J00107_0293_AHLLT7BBXY_1549/L1 /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/coniferiporia```
 - FastQC Report: http://hts.cgrb.oregonstate.edu/illumina/210927_J00107_0293_AHLLT7BBXY_1549-L1
 
 ## Script 2: Create a list of the reads
