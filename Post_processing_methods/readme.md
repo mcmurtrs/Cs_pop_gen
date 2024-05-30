@@ -65,13 +65,12 @@ CPU=8
 ```
 
 ### Script 4: Trim low quality reads with Trimmomatic (http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf)
+- Used Trimmomatic (version 0.32)
+- For Trimmomatic the following parameters were used `LEADING:30 TRAILING:30 MINLEN of 25, and SLIDINGWINDOW:4:20`
 
-### References: 
 
-- For Trimmomatic the following parameters were used MINLEN of 25, and SLIDINGWINDOW:4:20. These were used in order to prevent 
-- 
-- Trimmomatic (ver 0.32; options LEADING:30 TRAILING:30 SLIDINGWINDOW:4:30 MINLEN:50; Bolger,
-Lohse, & Usadel, 2014)
+### Trimmomatic References: 
+ 
 - Bolger, A. M., Lohse, M., & Usadel, B. (2014). Trimmomatic: a flexible trimmer for Illumina sequence
 data. Bioinformatics, 30(15), 2114-2120. doi:10.1093/bioinformatics/btu170
 - Chung, Chia-Lin; Lee, Tracy J.; Akiba, Mitsuteru; Lee, Hsin-Han; Kuo, Tzu-Hao; Liu, Dang; Ke, Huei-Mien; Yokoi, Toshiro; Roa, Marylette B; Lu, Meiyeh J; Chang, Ya-Yun; Ann, Pao-Jen; Tsai, Jyh-Nong; Chen, Chien-Yu; Tzean, Shean-Shong; Ota, Yuko; Hattori, Tsutomu; Sahashi, Norio; Liou, Ruey-Fen; Kikuchi, Taisei; Tsai, Isheng J (2017). Comparative and population genomics landscape of <i>Phellinus noxius</i> : a hypervariable fungus causing root rot in trees. Molecular Ecology, (), –. doi:10.1111/mec.14359 
