@@ -4,9 +4,10 @@
 /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/VCF
 ```
 
-# Directory /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/VCF Index:
+# Directory Index:
 
 - VCF file containing all 90 samples (85 C. sulphurascens and 5 C. weirii): `C_sulph_C_weirii_FINAL.vcf.gz`
+- 
 
 # Helpful commands:
 
