@@ -12,7 +12,7 @@
 ```cp -r /nfs2/hts/illumina/210927_J00107_0293_AHLLT7BBXY_1549/L1 /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/coniferiporia```
 - FastQC Report: http://hts.cgrb.oregonstate.edu/illumina/210927_J00107_0293_AHLLT7BBXY_1549-L1
 
-## Script 2: Create a list of the reads
+## Script 2: Create a list of the reads: make sure to type `bash` on the command line before using the following commands: 
 
 ``` 
 bash
