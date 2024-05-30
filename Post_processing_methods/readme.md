@@ -18,14 +18,14 @@
 bash
 
 #Illumina 1532
-for i in /nfs1/BPP/LeBoldus_Lab/lab_data/coniferiporia/L2/lane*_R1_*; do a=$(basename $i| cut -f 7,8 -d "-"| cut -f 1 -d "_"); b=$(readlink -f $i); #c=$(readlink -f $i| sed 's/R1/R2/g'); printf ${a%%.*}";"$b";"$c"\n"; done > reads_list.txt
+for i in /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/coniferiporia/L2/lane*_R1_*; do a=$(basename $i| cut -f 7,8 -d "-"| cut -f 1 -d "_"); b=$(readlink -f $i); #c=$(readlink -f $i| sed 's/R1/R2/g'); printf ${a%%.*}";"$b";"$c"\n"; done > reads_list.txt
 
 #Illumina 1547
-for i in /nfs1/BPP/LeBoldus_Lab/lab_data/coniferiporia/L2456/lane*_R1_*; do a=$(basename $i| cut -f 7,8 -d "-"| cut -f 1 -d "_"); b=$(readlink -f $i); c=$(readlink -f $i| sed 's/R1/R2/g'); printf ${a%%.*}";"$b";"$c"\n"; done > reads_list.txt
+for i in /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/coniferiporia/L2456/lane*_R1_*; do a=$(basename $i| cut -f 7,8 -d "-"| cut -f 1 -d "_"); b=$(readlink -f $i); c=$(readlink -f $i| sed 's/R1/R2/g'); printf ${a%%.*}";"$b";"$c"\n"; done > reads_list.txt
 
 
 #Illumina 1549
-for i in /nfs1/BPP/LeBoldus_Lab/lab_data/coniferiporia/L1/lane*_R1_*; do a=$(basename $i| cut -f 7,8 -d "-"| cut -f 1 -d "_"); b=$(readlink -f $i); c=$(readlink -f $i| sed 's/R1/R2/g'); printf ${a%%.*}";"$b";"$c"\n"; done > reads_list.txt
+for i in /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/coniferiporiaL1/lane*_R1_*; do a=$(basename $i| cut -f 7,8 -d "-"| cut -f 1 -d "_"); b=$(readlink -f $i); c=$(readlink -f $i| sed 's/R1/R2/g'); printf ${a%%.*}";"$b";"$c"\n"; done > reads_list.txt
 ```
 
 ## Script 3: Trim adapters with cutadapt (https://cutadapt.readthedocs.io/en/stable/)
