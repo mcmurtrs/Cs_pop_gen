@@ -65,13 +65,13 @@ cutadapt -q 15,10 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCA -A AGATCGGAAGAGCGTCGTGTAG
 ```
 
 ### Script 4: Trim low quality reads with Trimmomatic (http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf)
-- Used Trimmomatic (version 0.32)
-- For Trimmomatic the following parameters were used `MINLEN of 25, and SLIDINGWINDOW:4:20`
+- Used Trimmomatic (version 0.39)
+- For Trimmomatic the following parameters were used `MINLEN of 25 and SLIDINGWINDOW:4:20`
 
 
 ```
 bash
-for i in /nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/cs_align/1_Step_1_Trim_Adapters/Illumina_1547/*.fastq.gz*; do a=$(basename $i| cut -f 2,5 -d "/"| cut -f 1 -d "_"); b=$(readlink -f $i); c=$(readlink -f $i| sed 's/1P/2P/g'); printf ${a%%.*}";"$b";"$c"\n"; done > reads_list.txt
+for i in /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/1_Step_1_Trim_Adapters/Illumina_1547/*.fastq.gz*; do a=$(basename $i| cut -f 2,5 -d "/"| cut -f 1 -d "_"); b=$(readlink -f $i); c=$(readlink -f $i| sed 's/1P/2P/g'); printf ${a%%.*}";"$b";"$c"\n"; done > reads_list.txt
 ```
 
 #### Script 4a: Testing
@@ -84,14 +84,14 @@ java -jar trimmomatic-0.39.jar PE -threads 4 AP9_1P.fastq.gz AP9_2P.fastq.gz AP9
 
 #Illumina 1549
 ```
-cd /nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/bin/Trimmomatic-0.39
+cd /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/bin/Trimmomatic-0.39
 java -jar trimmomatic-0.39.jar PE -threads 4 A1_1P.fastq.gz A1_2P.fastq.gz A1_1P_trim.fastq.gz A1_2P_untrim.fastq.gz A1_1P_trim.fastq.gz A1_2P_untrim.fastq.gz SLIDINGWINDOW:4:20 MINLEN:25
 ```
 
 
 
 #### Script 4b: Trimmomatic
-##### qsub /nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/bin/Trimmomatic-0.3/TrimmomaticTrim.sh
+##### qsub /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/Trimmomatic-0.3/TrimmomaticTrim.sh
 
 ``` 
 #!/bin/bash
@@ -134,7 +134,7 @@ data. Bioinformatics, 30(15), 2114-2120. doi:10.1093/bioinformatics/btu170
 
 ### Script 5 : FastQC on Trimmed/Filtered Reads
 ``` 
-cd /nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/cs_align/2_Step_2_Trim_with_Trimmomatic/Illumina_1547
+cd /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/2_Step_2_Trim_with_Trimmomatic/Illumina_1547
 SGE_Batch -c 'fast_qc.sh' -P 8 -f 8G -m 8G -r fastQC_log
 
 ```
