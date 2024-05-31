@@ -158,7 +158,7 @@ https://github.com/mcmurtrs/lrr.fastqc.github.io/blob/main/README.md
 
 #### Downloading reference genome:
 
-- Coniferiporia sulphurascens reference genome can be found here:
+- *Coniferiporia sulphurascens* reference genome can be found here:
 
  https://www.ncbi.nlm.nih.gov/datasets/genome/?taxon=175648
 
@@ -170,9 +170,19 @@ cd /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/REFERENCE
 bwa index GCA_002794785.1_PSUO.v3_genomic.fna
 ```
 
+#### Create a dictionary for the reference genome:
+- Used samtools version 1.19.2
+
+```
+samtools faidx GCA_002794785.1_PSUO.v3_genomic.fna
+```
+#### Make a list of the trimmed reads:
+
 ``` 
 for i in /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/2_Step_2_Trim_with_Trimmomatic/Illumina_1549/*.fastq.gz*; do a=$(basename $i| cut -f 2,5 -d "/"| cut -f 1 -d "_"); b=$(readlink -f $i); c=$(readlink -f $i| sed 's/1P/2P/g'); printf ${a%%.*}";"$b";"$c"\n"; done > reads_list.txt
 ``` 
+
+#### BWA Aligner:
 
 ``` 
 cd /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/3_Step_3_BWA_aligner/Illumina_1547
