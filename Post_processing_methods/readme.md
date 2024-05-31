@@ -157,11 +157,11 @@ https://github.com/mcmurtrs/lrr.fastqc.github.io/blob/main/README.md
 ### Script 6 : Alignment with BWA
 
 ``` 
-for i in /nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/cs_align/2_Step_2_Trim_with_Trimmomatic/Illumina_1549/*.fastq.gz*; do a=$(basename $i| cut -f 2,5 -d "/"| cut -f 1 -d "_"); b=$(readlink -f $i); c=$(readlink -f $i| sed 's/1P/2P/g'); printf ${a%%.*}";"$b";"$c"\n"; done > reads_list.txt
+for i in /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/2_Step_2_Trim_with_Trimmomatic/Illumina_1549/*.fastq.gz*; do a=$(basename $i| cut -f 2,5 -d "/"| cut -f 1 -d "_"); b=$(readlink -f $i); c=$(readlink -f $i| sed 's/1P/2P/g'); printf ${a%%.*}";"$b";"$c"\n"; done > reads_list.txt
 ``` 
 
 ``` 
-cd /nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/cs_align/3_Step_3_BWA_aligner/Illumina_1547
+cd /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/3_Step_3_BWA_aligner/Illumina_1547
 qsub BWA_aligner4.sh
 
 #!/bin/bash
@@ -179,8 +179,8 @@ qsub BWA_aligner4.sh
 
 IFS="
 "
-REF="/nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/cs_align/Index/Index/GCA_002794785.1_PSUO.v3_genomic.fna"
-MYFILE='/nfs1/BPP/LeBoldus_Lab/user_folders/mcmurtrs/cs_align/3_Step_3_BWA_aligner/Illumina_1547/reads_list1.txt'
+REF="/nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/REFERENCE/GCA_002794785.1_PSUO.v3_genomic.fna"
+MYFILE='/nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/3_Step_3_BWA_aligner/Illumina_1547/reads_list1.txt'
 CPU=8
 
 
