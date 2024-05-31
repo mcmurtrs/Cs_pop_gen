@@ -1,4 +1,4 @@
-## Script 1: Copy reads from CGRB to LeBoldus Lab directory
+## Script 1: Copy reads from CQLS to LeBoldus Lab directory
 
 ### Illumina #1532, Completed 5/3/21
 ```cp -r /nfs2/hts/illumina/210430_J00107_0276_AHKNCYBBXY_1532/L2 /nfs4/BPP/Anderson_LeBoldus/LeBoldus/mcmurtrs/coniferiporia```
